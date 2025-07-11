@@ -622,7 +622,7 @@ class WebsiteAnalyzer:
         }
     
     def _generate_ai_tools_integration(self, website_data: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """Generate AI tools integration recommendations"""
+        """Generate AI tools integration recommendations with learn more links"""
         website_type = self._categorize_website(website_data)
         ai_tools = []
         
@@ -634,6 +634,8 @@ class WebsiteAnalyzer:
             "integration_complexity": "Medium",
             "expected_impact": "High",
             "use_case": "Reduce support tickets by 40% and provide 24/7 customer assistance",
+            "learn_more_url": "https://www.intercom.com/chatbot",
+            "provider_examples": ["Intercom", "Zendesk", "Dialogflow"],
             "implementation_steps": [
                 "Choose chatbot platform (Dialogflow, Microsoft Bot Framework, or Rasa)",
                 "Train AI model with existing FAQ and support data",
@@ -645,11 +647,13 @@ class WebsiteAnalyzer:
         # Content personalization for all sites
         ai_tools.append({
             "category": "Personalization",
-            "tool_name": "Content Personalization Engine",
+            "tool_name": "AI Content Personalization Engine",
             "description": "AI-driven content recommendations based on user behavior and preferences",
             "integration_complexity": "High",
             "expected_impact": "High",
             "use_case": "Increase user engagement by 30% through personalized content delivery",
+            "learn_more_url": "https://www.optimizely.com/personalization/",
+            "provider_examples": ["Dynamic Yield", "Optimizely", "Adobe Target"],
             "implementation_steps": [
                 "Implement user tracking and behavior analytics",
                 "Set up machine learning recommendation system",
@@ -662,11 +666,13 @@ class WebsiteAnalyzer:
         if 'e-commerce' in website_type:
             ai_tools.append({
                 "category": "E-commerce",
-                "tool_name": "Product Recommendation AI",
+                "tool_name": "AI Product Recommendation Engine",
                 "description": "Smart product recommendations based on user behavior and purchase history",
                 "integration_complexity": "Medium",
                 "expected_impact": "High",
                 "use_case": "Increase average order value by 25% with intelligent upselling",
+                "learn_more_url": "https://www.salesforce.com/products/commerce-cloud/features/ai-recommendations/",
+                "provider_examples": ["Salesforce Einstein", "Dynamic Yield", "Yotpo"],
                 "implementation_steps": [
                     "Integrate with product catalog and user data",
                     "Implement collaborative filtering algorithms",
@@ -677,11 +683,13 @@ class WebsiteAnalyzer:
         elif 'blog' in website_type:
             ai_tools.append({
                 "category": "Content",
-                "tool_name": "AI Content Optimization",
+                "tool_name": "AI Content Optimization & SEO",
                 "description": "Automated content optimization and SEO enhancement using AI",
                 "integration_complexity": "Medium",
                 "expected_impact": "Medium",
                 "use_case": "Improve content quality and search rankings automatically",
+                "learn_more_url": "https://www.marketmuse.com/",
+                "provider_examples": ["MarketMuse", "Clearscope", "Frase"],
                 "implementation_steps": [
                     "Integrate with content management system",
                     "Set up AI content analysis tools",
@@ -692,11 +700,13 @@ class WebsiteAnalyzer:
         else:
             ai_tools.append({
                 "category": "Analytics",
-                "tool_name": "Predictive Analytics Dashboard",
+                "tool_name": "AI Predictive Analytics Dashboard",
                 "description": "AI-powered analytics for predicting user behavior and business trends",
                 "integration_complexity": "High",
                 "expected_impact": "High",
                 "use_case": "Predict user churn and optimize conversion funnels proactively",
+                "learn_more_url": "https://www.google.com/analytics/",
+                "provider_examples": ["Google Analytics 4", "Adobe Analytics", "Mixpanel"],
                 "implementation_steps": [
                     "Set up comprehensive data collection",
                     "Implement machine learning prediction models",
@@ -714,6 +724,8 @@ class WebsiteAnalyzer:
                 "integration_complexity": "Medium",
                 "expected_impact": "Medium",
                 "use_case": "Improve search accuracy by 60% and reduce bounce rate from search results",
+                "learn_more_url": "https://www.algolia.com/products/search/",
+                "provider_examples": ["Algolia", "Elasticsearch", "Swiftype"],
                 "implementation_steps": [
                     "Implement search indexing system",
                     "Integrate NLP capabilities (Elasticsearch or Algolia)",
@@ -721,6 +733,24 @@ class WebsiteAnalyzer:
                     "Optimize search results ranking with AI"
                 ]
             })
+        
+        # Add AI-powered A/B testing
+        ai_tools.append({
+            "category": "Optimization",
+            "tool_name": "AI-Powered A/B Testing",
+            "description": "Automated testing and optimization using machine learning algorithms",
+            "integration_complexity": "Medium",
+            "expected_impact": "High",
+            "use_case": "Increase conversion rates by 20% through intelligent testing",
+            "learn_more_url": "https://www.optimizely.com/",
+            "provider_examples": ["Optimizely", "VWO", "Google Optimize"],
+            "implementation_steps": [
+                "Set up A/B testing framework",
+                "Implement AI-driven test creation",
+                "Configure automated winner selection",
+                "Monitor and analyze test results"
+            ]
+        })
         
         return ai_tools
     
