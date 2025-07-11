@@ -304,38 +304,58 @@ const App = () => {
 
             {/* Suggestions */}
             <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-              <div className="flex items-center mb-6">
-                <svg className="w-8 h-8 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-                <h2 className="text-3xl font-bold text-gray-800">Improvement Suggestions</h2>
+              <div className="flex items-center mb-8">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mr-4">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-800">Improvement Suggestions</h2>
+                  <p className="text-gray-600 mt-1">Actionable recommendations to enhance your website</p>
+                </div>
               </div>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {analysis.suggestions?.map((suggestion, index) => (
-                  <div key={index} className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all">
+                  <div key={index} className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-6 border border-gray-200 hover:shadow-lg hover:border-blue-300 transition-all duration-300 group">
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex-1">
-                        <h3 className="font-semibold text-gray-800 text-lg mb-1">{suggestion.title}</h3>
-                        <span className="text-sm text-blue-600 font-medium">{suggestion.category}</span>
+                        <h3 className="font-bold text-gray-800 text-lg mb-2 group-hover:text-blue-600 transition-colors">{suggestion.title}</h3>
+                        <div className="flex items-center">
+                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">
+                            <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                            </svg>
+                            {suggestion.category}
+                          </span>
+                        </div>
                       </div>
-                      <span className={`px-3 py-1 text-xs font-medium rounded-full border ${getPriorityColor(suggestion.priority)}`}>
+                      <span className={`px-4 py-2 text-sm font-bold rounded-full border-2 ${getPriorityColor(suggestion.priority)} shadow-sm`}>
                         {suggestion.priority}
                       </span>
                     </div>
-                    <p className="text-gray-600 mb-4 leading-relaxed">{suggestion.description}</p>
-                    <div className="flex justify-between text-sm">
-                      <div className="flex items-center space-x-4">
-                        <span className="flex items-center">
-                          <svg className="w-4 h-4 text-gray-400 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <p className="text-gray-600 mb-6 leading-relaxed">{suggestion.description}</p>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div className="flex items-center mb-2">
+                          <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                           </svg>
-                          Impact: {suggestion.impact}
+                          <span className="text-sm font-semibold text-gray-700">Impact</span>
+                        </div>
+                        <span className={`text-lg font-bold ${suggestion.impact === 'High' ? 'text-green-600' : suggestion.impact === 'Medium' ? 'text-yellow-600' : 'text-blue-600'}`}>
+                          {suggestion.impact}
                         </span>
-                        <span className="flex items-center">
-                          <svg className="w-4 h-4 text-gray-400 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      </div>
+                      <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div className="flex items-center mb-2">
+                          <svg className="w-5 h-5 text-purple-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
-                          Effort: {suggestion.effort}
+                          <span className="text-sm font-semibold text-gray-700">Effort</span>
+                        </div>
+                        <span className={`text-lg font-bold ${suggestion.effort === 'Low' ? 'text-green-600' : suggestion.effort === 'Medium' ? 'text-yellow-600' : 'text-red-600'}`}>
+                          {suggestion.effort}
                         </span>
                       </div>
                     </div>
