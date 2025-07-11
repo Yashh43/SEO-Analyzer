@@ -433,6 +433,7 @@ class WebsiteAnalyzer:
                     "tools_recommended": self._generate_basic_tools(website_data),
                     "meta_analysis": self._generate_meta_analysis(website_data),
                     "ai_tools_integration": self._generate_ai_tools_integration(website_data),
+                    "ai_readiness_score": self._generate_ai_readiness_score(website_data),
                     "categories": self._generate_category_scores(website_data)
                 }
                 
