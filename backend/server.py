@@ -411,6 +411,9 @@ class WebsiteAnalyzer:
                     if field not in analysis_data:
                         raise ValueError(f"Missing required field: {field}")
                 
+                # Add AI readiness score
+                analysis_data['ai_readiness_score'] = self._generate_ai_readiness_score(website_data)
+                
                 return analysis_data
                 
             except (json.JSONDecodeError, ValueError) as e:
