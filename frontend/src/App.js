@@ -550,6 +550,43 @@ const App = () => {
                           </div>
                           <p className="text-gray-700 font-medium">{tool.use_case}</p>
                         </div>
+                        
+                        {/* Learn More Section */}
+                        {tool.learn_more_url && (
+                          <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center">
+                                <svg className="w-5 h-5 text-purple-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                                </svg>
+                                <span className="text-sm font-bold text-gray-700">Learn More</span>
+                              </div>
+                              <a 
+                                href={tool.learn_more_url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-medium hover:bg-purple-200 transition-colors"
+                              >
+                                Visit Site
+                                <svg className="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                </svg>
+                              </a>
+                            </div>
+                            {tool.provider_examples && (
+                              <div>
+                                <p className="text-xs text-gray-600 mb-2">Popular Providers:</p>
+                                <div className="flex flex-wrap gap-2">
+                                  {tool.provider_examples.map((provider, providerIndex) => (
+                                    <span key={providerIndex} className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs">
+                                      {provider}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        )}
                       </div>
                       {tool.implementation_steps && (
                         <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
