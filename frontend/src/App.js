@@ -298,32 +298,51 @@ const App = () => {
             {/* Category Scores */}
             {analysis.categories && (
               <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-                <div className="flex items-center mb-6">
-                  <svg className="w-8 h-8 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
-                  </svg>
-                  <h2 className="text-3xl font-bold text-gray-800">Category Scores</h2>
+                <div className="flex items-center mb-8">
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 className="text-3xl font-bold text-gray-800">Category Scores</h2>
+                    <p className="text-gray-600 mt-1">Detailed breakdown of your website's performance metrics</p>
+                  </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
                   {Object.entries(analysis.categories).map(([category, data]) => (
-                    <div key={category} className={`p-6 rounded-xl border-2 ${getCategoryBgColor(data.score)} transition-all hover:shadow-lg`}>
-                      <div className="text-center mb-4">
-                        <ScoreCircle score={data.score} size="small" />
-                        <h3 className="font-semibold text-gray-800 capitalize mt-2 text-lg">{category}</h3>
-                      </div>
-                      {data.key_issues && (
-                        <div className="space-y-2">
-                          <h4 className="text-sm font-medium text-gray-700">Key Issues:</h4>
-                          <ul className="text-sm text-gray-600 space-y-1">
-                            {data.key_issues.slice(0, 2).map((issue, index) => (
-                              <li key={index} className="flex items-start">
-                                <span className="text-red-400 mr-2 mt-1">•</span>
-                                <span>{issue}</span>
-                              </li>
-                            ))}
-                          </ul>
+                    <div key={category} className={`relative overflow-hidden rounded-xl border-2 ${getCategoryBgColor(data.score)} transition-all hover:shadow-lg hover:scale-105 transform duration-300`}>
+                      <div className="p-6">
+                        <div className="text-center mb-4">
+                          <ScoreCircle score={data.score} size="small" />
+                          <h3 className="font-bold text-gray-800 capitalize mt-3 text-lg">{category}</h3>
                         </div>
-                      )}
+                        {data.key_issues && (
+                          <div className="space-y-3">
+                            <div className="border-t border-gray-200 pt-4">
+                              <h4 className="text-sm font-bold text-gray-700 mb-3 flex items-center">
+                                <svg className="w-4 h-4 text-red-500 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                                </svg>
+                                Key Issues
+                              </h4>
+                              <div className="space-y-2">
+                                {data.key_issues.slice(0, 3).map((issue, index) => (
+                                  <div key={index} className="bg-white p-3 rounded-lg border border-gray-200 shadow-sm">
+                                    <div className="flex items-start">
+                                      <span className="text-red-400 mr-2 mt-1 flex-shrink-0">•</span>
+                                      <span className="text-sm text-gray-700 font-medium">{issue}</span>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      
+                      {/* Score indicator at the bottom */}
+                      <div className={`absolute bottom-0 left-0 right-0 h-1 ${data.score >= 80 ? 'bg-green-500' : data.score >= 60 ? 'bg-yellow-500' : 'bg-red-500'}`}></div>
                     </div>
                   ))}
                 </div>
