@@ -413,50 +413,77 @@ const App = () => {
 
             {/* AI Tools Integration */}
             <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-              <div className="flex items-center mb-6">
-                <svg className="w-8 h-8 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                <h2 className="text-3xl font-bold text-gray-800">AI Tools Integration</h2>
+              <div className="flex items-center mb-8">
+                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center mr-4">
+                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-800">AI Tools Integration</h2>
+                  <p className="text-gray-600 mt-1">Recommended AI solutions to enhance your website</p>
+                </div>
               </div>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {analysis.ai_tools_integration?.map((tool, index) => (
-                  <div key={index} className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all">
+                  <div key={index} className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 border border-purple-200 hover:shadow-lg transition-all duration-300 group">
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex-1">
-                        <h3 className="font-semibold text-gray-800 text-lg mb-1">{tool.tool_name}</h3>
-                        <span className="text-sm text-purple-600 font-medium">{tool.category}</span>
+                        <h3 className="font-bold text-gray-800 text-lg mb-2 group-hover:text-purple-600 transition-colors">{tool.tool_name}</h3>
+                        <div className="flex items-center">
+                          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-700 border border-purple-200">
+                            <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                            </svg>
+                            {tool.category}
+                          </span>
+                        </div>
                       </div>
-                      <span className={`px-3 py-1 text-xs font-medium rounded-full ${getComplexityColor(tool.integration_complexity)}`}>
-                        {tool.integration_complexity} Complexity
+                      <span className={`px-4 py-2 text-sm font-bold rounded-full ${getComplexityColor(tool.integration_complexity)} border shadow-sm`}>
+                        {tool.integration_complexity}
                       </span>
                     </div>
-                    <p className="text-gray-600 mb-4 leading-relaxed">{tool.description}</p>
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="flex items-center text-green-600">
-                          <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                          </svg>
-                          Expected Impact: {tool.expected_impact}
-                        </span>
-                      </div>
-                      <div className="text-sm text-gray-700">
-                        <strong>Use Case:</strong> {tool.use_case}
+                    <p className="text-gray-600 mb-6 leading-relaxed">{tool.description}</p>
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-1 gap-4">
+                        <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                          <div className="flex items-center mb-2">
+                            <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                            <span className="text-sm font-bold text-gray-700">Expected Impact</span>
+                          </div>
+                          <span className="text-lg font-bold text-green-600">{tool.expected_impact}</span>
+                        </div>
+                        <div className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                          <div className="flex items-center mb-2">
+                            <svg className="w-5 h-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span className="text-sm font-bold text-gray-700">Use Case</span>
+                          </div>
+                          <p className="text-gray-700 font-medium">{tool.use_case}</p>
+                        </div>
                       </div>
                       {tool.implementation_steps && (
-                        <div className="mt-4 p-4 bg-white rounded-lg border border-gray-200">
-                          <h4 className="font-medium text-gray-800 mb-3 flex items-center">
-                            <svg className="w-4 h-4 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                            </svg>
-                            Implementation Steps:
-                          </h4>
-                          <ol className="list-decimal list-inside text-sm text-gray-600 space-y-2">
-                            {tool.implementation_steps.map((step, stepIndex) => (
-                              <li key={stepIndex} className="leading-relaxed">{step}</li>
-                            ))}
-                          </ol>
+                        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                          <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 border-b border-gray-200">
+                            <h4 className="font-bold text-gray-800 flex items-center">
+                              <svg className="w-5 h-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                              </svg>
+                              Implementation Steps
+                            </h4>
+                          </div>
+                          <div className="p-4">
+                            <ol className="list-decimal list-inside space-y-3">
+                              {tool.implementation_steps.map((step, stepIndex) => (
+                                <li key={stepIndex} className="text-sm text-gray-700 leading-relaxed p-2 bg-gray-50 rounded-lg border border-gray-200">
+                                  <span className="font-medium">{step}</span>
+                                </li>
+                              ))}
+                            </ol>
+                          </div>
                         </div>
                       )}
                     </div>
