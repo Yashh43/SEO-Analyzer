@@ -957,7 +957,8 @@ async def analyze_website(request: WebsiteAnalysisRequest):
             overall_score=analysis_result.get('overall_score', 70),
             categories=analysis_result.get('categories', {}),
             meta_analysis=analysis_result.get('meta_analysis', {}),
-            ai_tools_integration=analysis_result.get('ai_tools_integration', [])
+            ai_tools_integration=analysis_result.get('ai_tools_integration', []),
+            ai_readiness_score=analysis_result.get('ai_readiness_score', {})
         )
         
         return response
