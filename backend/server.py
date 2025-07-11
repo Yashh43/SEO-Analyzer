@@ -43,6 +43,7 @@ class WebsiteAnalysisResponse(BaseModel):
     categories: Dict[str, Any]
     meta_analysis: Dict[str, Any]  # New field for meta title/description analysis
     ai_tools_integration: List[Dict[str, Any]]  # New field for AI tools recommendations
+    ai_readiness_score: Dict[str, Any]  # New field for AI readiness score and comparison
 
 # Gemini API configuration
 GEMINI_API_KEY = "AIzaSyBf0atXh4HUKQYThHBHKzMUdVrW50chIfA"
