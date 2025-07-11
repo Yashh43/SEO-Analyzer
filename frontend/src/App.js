@@ -215,6 +215,92 @@ const App = () => {
         {/* Analysis Results */}
         {analysis && (
           <div className="max-w-7xl mx-auto space-y-8">
+            {/* AI Readiness Score Section */}
+            {analysis.ai_readiness_score && (
+              <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+                <div className="flex items-center mb-8">
+                  <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center mr-4">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 className="text-3xl font-bold text-gray-800">AI Readiness Score</h2>
+                    <p className="text-gray-600 mt-1">How ready is your website for AI integration compared to industry standards</p>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                  {/* AI Score Display */}
+                  <div className="text-center lg:border-r lg:border-gray-200 lg:pr-8">
+                    <div className="mb-6">
+                      <ScoreCircle score={analysis.ai_readiness_score.overall_ai_score} />
+                    </div>
+                    <div className="space-y-2">
+                      <div className="text-sm text-gray-600 font-medium">AI Readiness</div>
+                      <div className="text-3xl font-bold text-gray-800">{analysis.ai_readiness_score.overall_ai_score}/100</div>
+                      <div className={`text-sm font-medium px-3 py-1 rounded-full inline-flex items-center ${
+                        analysis.ai_readiness_score.overall_ai_score >= 80 ? 'bg-green-100 text-green-700' : 
+                        analysis.ai_readiness_score.overall_ai_score >= 65 ? 'bg-yellow-100 text-yellow-700' : 
+                        'bg-red-100 text-red-700'
+                      }`}>
+                        {analysis.ai_readiness_score.ai_readiness_level}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Industry Comparison */}
+                  <div className="space-y-6">
+                    <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-6 border border-indigo-200">
+                      <h3 className="font-bold text-gray-800 mb-4 flex items-center">
+                        <svg className="w-5 h-5 text-indigo-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                        Industry Comparison
+                      </h3>
+                      <div className="space-y-3">
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-gray-600">Your Score</span>
+                          <span className="font-bold text-indigo-600">{analysis.ai_readiness_score.overall_ai_score}</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-gray-600">Industry Average</span>
+                          <span className="font-bold text-gray-600">{analysis.ai_readiness_score.industry_average}</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-gray-600">Performance</span>
+                          <span className={`font-bold ${
+                            analysis.ai_readiness_score.performance_vs_industry >= 0 ? 'text-green-600' : 'text-red-600'
+                          }`}>
+                            {analysis.ai_readiness_score.performance_vs_industry >= 0 ? '+' : ''}{analysis.ai_readiness_score.performance_vs_industry}
+                          </span>
+                        </div>
+                        <div className="text-xs text-gray-500 mt-2">
+                          Category: {analysis.ai_readiness_score.industry_category}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* AI Factors */}
+                  <div className="space-y-4">
+                    <h3 className="font-bold text-gray-800 mb-4">AI Readiness Factors</h3>
+                    {Object.entries(analysis.ai_readiness_score.ai_factors).map(([factor, data]) => (
+                      <div key={factor} className="bg-white p-4 rounded-lg border border-gray-200 shadow-sm">
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="text-sm font-medium text-gray-700 capitalize">{factor.replace('_', ' ')}</span>
+                          <span className={`text-sm font-bold ${data.score >= 80 ? 'text-green-600' : data.score >= 60 ? 'text-yellow-600' : 'text-red-600'}`}>
+                            {data.score}/100
+                          </span>
+                        </div>
+                        <p className="text-xs text-gray-600 mb-1">{data.description}</p>
+                        <p className="text-xs font-medium text-blue-600">{data.improvement}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
             {/* Overview */}
             <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
               <div className="flex items-center mb-8">
